@@ -945,17 +945,11 @@ SBW.Controllers.Services.Facebook = SBW.Controllers.Services.ServiceController.e
       },
       callback = (function(successCallback, errorCallback) {
         return function(isLoggedIn) {
-          if (isLoggedIn) {
-            getAlbumsCallback(successCallback, errorCallback);
-          } else {
-            service.startActionHandler(function() {
               getAlbumsCallback(successCallback, errorCallback);
-            });
-          }
-        };
+          };
       })(successCallback, errorCallback);
 
-    service.checkUserLoggedIn(callback);
+    service.startActionHandler(callback);
   },
   /**
    * Success Callback for getAlbums method.
@@ -1036,17 +1030,14 @@ SBW.Controllers.Services.Facebook = SBW.Controllers.Services.ServiceController.e
       },
       callback = (function(albumId, successCallback, errorCallback) {
         return function(isLoggedIn) {
-          if (isLoggedIn) {
-            getPhotosFromAlbumCallback(albumId, successCallback, errorCallback);
-          } else {
-            service.startActionHandler(function() {
+          {
               getPhotosFromAlbumCallback(albumId, successCallback, errorCallback);
-            });
+           
           }
         };
       })(albumId, successCallback, errorCallback);
 
-    service.checkUserLoggedIn(callback);
+    service.startActionHandler(callback);
   },
   /**
    * @method
